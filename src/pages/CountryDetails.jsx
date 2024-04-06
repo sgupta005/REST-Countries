@@ -8,9 +8,8 @@ function CountryDetails({ countries }) {
   const countryDetails = countries.find(
     (country) => country.cca3 === countryCode
   );
-  const borders = countryDetails?.borders;
+  const borderCodes = countryDetails?.borders;
 
-  // if (isLoading) return <p>Loading...</p>;
   if (countryDetails)
     return (
       <div>
@@ -29,7 +28,9 @@ function CountryDetails({ countries }) {
           <p>Currencies</p>
           <p>languages</p>
         </div>
-        {borders && <BorderCountries borders={borders} />}
+        {borderCodes && (
+          <BorderCountries borderCodes={borderCodes} countries={countries} />
+        )}
       </div>
     );
 }
