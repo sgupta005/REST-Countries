@@ -1,6 +1,14 @@
-function Filter({ filter, setFilter }) {
+function Filter({ filter, setSearchParams }) {
   return (
-    <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+    <select
+      value={filter}
+      onChange={(e) =>
+        setSearchParams((prev) => {
+          prev.set('filter', e.target.value);
+          return prev;
+        })
+      }
+    >
       <option value="">All</option>
       <option value="Africa">Africa</option>
       <option value="Americas">Americas</option>

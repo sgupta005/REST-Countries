@@ -2,11 +2,15 @@ import Countries from '../components/Countries';
 import Loader from '../components/Loader';
 import Search from '../components/Search';
 import Filter from '../components/Filter';
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 function HomePage({ countries, isLoading }) {
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams({
+    search: '',
+    filter: '',
+  });
+  const search = searchParams.get('search');
+  const filter = searchParams.get('filter');
 
   countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
   let filteredCountries = filter
@@ -21,8 +25,8 @@ function HomePage({ countries, isLoading }) {
     <Loader />
   ) : (
     <>
-      <Search search={search} setSearch={setSearch} />
-      <Filter filter={filter} setFilter={setFilter} />
+      <Search search={search} setSearchParams={setSearchParams} />
+      <Filter filter={filter} setSearchParams={setSearchParams} />
       <Countries countries={filteredCountries} />
     </>
   );
